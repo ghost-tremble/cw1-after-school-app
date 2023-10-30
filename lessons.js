@@ -2,7 +2,7 @@
 let lessons = [
   {
     subject: "Bible Studies",
-    spaces: 5,
+    spaces: 1,
     location: "Barnet",
     price: 500,
     image:
@@ -10,7 +10,7 @@ let lessons = [
   },
   {
     subject: "French Tutorial",
-    spaces: 5,
+    spaces: 4,
     location: "liverpool",
     price: 250,
     image:
@@ -18,7 +18,7 @@ let lessons = [
   },
   {
     subject: "Japanese Tutorial",
-    spaces: 5,
+    spaces: 2,
     location: "leeds",
     price: 750,
     image:

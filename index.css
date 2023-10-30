@@ -61,4 +61,27 @@ padding: 1rem;
 
 .card-button  button{
     padding: 10px 15px;
+    cursor: pointer;
+}
+
+.sort-section {
+    display: flex;width:80%;
+margin: 0px auto; 
+}
+.sort-type{
+    display: flex;
+}
+.sort-type div {
+    padding: 10px 15px;
+}
+.sort-section .sort-type {
+    margin-right:auto;
+}
+
+.sort-section .sort-mode{
+    display: flex;
+}
+
+.sort-section .sort-mode div{
+    padding: 10px 15px;
 }

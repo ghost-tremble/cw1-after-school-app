@@ -16,10 +16,47 @@
        
        <div class="search-container">
         
-           <input type="search"/><input type="button" value="search"/>
+           <input type="search" placeholder="Search Lessons" v-model ="searchText"/><input type="button" value="search"/>
        </div>
+      
+     <!-- Sort Tags -->
+     <div class="sort-section">
+      
+            <div class="sort-type">
+               <div>
+                <input type="radio" name="sort" value="subject" id="option1" v-model="sortType" /> <label for="option1">Subject</label>
+               </div>
+                <div>
+                    <input type="radio" name="sort" value="location" id="option2" v-model="sortType" /> <label for="option2">Location</label>
+                </div>
+                <div>
+                    <input type="radio" name="sort" value="price" id="option3"  v-model="sortType"/> <label for="option3">Price</label>
+                </div>
+                <div>
+                    <input type="radio" name="sort" value="spaces" id="option4"  v-model="sortType"/> <label for="option4">Spaces</label>
+                </div>
+                  
+        
+    
+            </div>
+            <div class="sort-mode">
+                <div>
+                    <input type="radio" name="mode" value="descending" id="descending" v-model="mode" /> <label for="descending">Descending</label>
+                </div>
+                <div>
+                    <input type="radio" name="mode" value="ascending" id="ascending" v-model="mode" /> <label for="ascending">Ascending</label>
+                </div>
+            
+            </div>
+            
+    
+        
+     </div>
+     
+     
+     <!-- Lessons section -->
        <div class="lesson-container">   
-           <div class="image-card" v-for="(lesson,key) in lessons" :key="lesson.subject">
+           <div class="image-card" v-for="(lesson,key) in sortedLessons" :key="lesson.subject">
             <div class="card-image"> <img :src="lesson.image"/></div> 
             <div class="card-text">
                 
@@ -48,8 +85,36 @@
             el:"#app",
             data:{
                 welcome:"hello world",
-                lessons
+                lessons,
+                showSubject:true,
+                sortType:'subject',
+                mode:"ascending" , 
+                query:"",
+                searchText:""
+             
+            },
+        
+            
+              computed: {
+                sortedLessons: function () {
+                    let order = this.mode ==='ascending' ? 1 : -1;
+                    return this.lessons.slice().filter((item)=>{
+                        return (item.subject.toLowerCase().includes(this.searchText.toLowerCase()))  || (item.location.toLowerCase().includes(this.searchText.toLowerCase()))
+                    }).sort((a, b) => {
+                       if(typeof a[this.sortType] === 'string' && typeof b[this.sortType]==='string'){
+                        
+                           return order*(a[this.sortType].localeCompare(b[this.sortType]))
+                       }
+                       else{
+                        return order * (a[this.sortType]-(b[this.sortType]))
+                       }
+                       
+                }
+                    )
             }
+        }
+            
+           
         })
     </script>
 </body>
