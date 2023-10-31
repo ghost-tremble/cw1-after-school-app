@@ -1,6 +1,7 @@
 // Ten lessons required here
 let lessons = [
   {
+    id:1,
     subject: "Bible Studies",
     spaces: 1,
     location: "Barnet",
@@ -9,6 +10,7 @@ let lessons = [
       "https://images.unsplash.com/photo-1442115597578-2d0fb2413734?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fENocmlzdGlhbiUyMGVkdWNhdGlvbiUyMGNvdXJzZXxlbnwwfHwwfHx8MA%3D%3D",
   },
   {
+    id:2,
     subject: "French Tutorial",
     spaces: 4,
     location: "liverpool",
@@ -17,14 +19,16 @@ let lessons = [
       "https://images.unsplash.com/photo-1505902987837-9e40ec37e607?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZnJlbmNofGVufDB8fDB8fHww",
   },
   {
+    id:3,
     subject: "Japanese Tutorial",
-    spaces: 2,
+    spaces: 0,
     location: "leeds",
     price: 750,
     image:
       "https://images.unsplash.com/photo-1492998680170-81f8863d8d2d?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGphcGFuZXNlJTIwdHV0b3JpYWx8ZW58MHx8MHx8fDA%3D",
   },
   {
+    id:4,
     subject: "Python Coding Tutorial",
     spaces: 5,
     location: "watford",
@@ -34,6 +38,7 @@ let lessons = [
   },
 
   {
+    id:5,
     subject: "History",
     spaces: 5,
     location: "north london",

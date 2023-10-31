@@ -85,3 +85,13 @@ margin: 0px auto;
 .sort-section .sort-mode div{
     padding: 10px 15px;
 }
+
+.cart{
+    display: flex;
+    padding: 10px 15px;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100px;
+    border:1px solid rgb(2, 2, 2);
+    margin:10px;
+}

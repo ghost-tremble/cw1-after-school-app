@@ -6,6 +6,7 @@
     <title>After School</title>
   </head>
   <link rel="stylesheet" href="./index.css" type="text/css"/>
+  
 <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
 <script src="./lessons.js"></script>
 </head>
@@ -13,9 +14,16 @@
     
     <div id="app">
        <h1>After School Activities</h1>
-       
-       <div class="search-container">
+       <button class="cart" v-bind:disabled ="cart.length < 1" >   
+            <h3>Cart</h3>
+            <p>{{cart.length}}</p>
+     
+       </button>
+     <div>
         
+     </div> 
+       <div class="search-container">
+      
            <input type="search" placeholder="Search Lessons" v-model ="searchText"/><input type="button" value="search"/>
        </div>
       
@@ -53,20 +61,19 @@
         
      </div>
      
-     
      <!-- Lessons section -->
        <div class="lesson-container">   
            <div class="image-card" v-for="(lesson,key) in sortedLessons" :key="lesson.subject">
             <div class="card-image"> <img :src="lesson.image"/></div> 
             <div class="card-text">
                 
-                <div   v-for="(value, key) in lesson" :key="key" v-if="key !=='image'">
+                <div   v-for="(value, key) in lesson" :key="key" v-if="key !== ('image' || '')">
                     <h4>{{ key }}: {{ value }}</h4>
                 </div>
               
             </div>
-            <div class="card-button"><button>Add to cart</button></div>
-            
+            <div class="card-button"><button  v-bind:disabled ="lesson.spaces < 1" @click = "addToCart(lesson)">Add to cart</button></div>
+           
            </div>
        </div>
     </div>
@@ -90,11 +97,36 @@
                 sortType:'subject',
                 mode:"ascending" , 
                 query:"",
-                searchText:""
+                searchText:"",
+                cart:[],
+                navigator:{
+                    lessons:"lessonPage",
+                    cart:"shoppingCartPage",
+                },
+                currentPage:"lessonPage"
              
             },
         
-            
+            methods:{
+                addToCart : function(lesson){
+                    let lessonInCart = this.cart.find((item) => item.id === lesson.id);
+                    const increaseAmount = 1;
+                    alert(lessonInCart)
+                    // check if lesson is already in cart
+                    if (lessonInCart){
+                        lessonInCart.spaces += 1 
+                    }
+                    else {
+                        this.cart = [...this.cart, {...lesson,spaces:1}];
+                    }
+                    lesson.spaces--
+                    
+                },
+                setCurrentPage:function(page){
+                    this.currentPage = page;
+                    
+                }
+            },
               computed: {
                 sortedLessons: function () {
                     let order = this.mode ==='ascending' ? 1 : -1;
@@ -111,11 +143,13 @@
                        
                 }
                     )
-            }
+            },
+            
+            
         }
             
            
         })
     </script>
 </body>
-</html>
+</html>9
