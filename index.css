@@ -95,3 +95,24 @@ margin: 0px auto;
     border:1px solid rgb(2, 2, 2);
     margin:10px;
 }
+
+.shoppingCartPage{
+    border:1px solid red ;
+}
+
+.cart-container{
+    display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        margin: 50px 100px;
+        border:1px solid
+}
+
+.checkout-container{
+    width: 40%;
+    border: 1px solid red;
+}
+
+/* .checkout-button{
+    
+} */

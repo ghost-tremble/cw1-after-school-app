@@ -14,79 +14,110 @@
     
     <div id="app">
        <h1>After School Activities</h1>
-       <button class="cart" v-bind:disabled ="cart.length < 1" >   
+       <!-- Disabling the cart only on the lesson Page -->
+       <button class="cart" v-bind:disabled ="cart.length < 1 && currentPage !== 1"  @click = "togglePage()">   
             <h3>Cart</h3>
             <p>{{cart.length}}</p>
      
        </button>
-     <div>
+     <div  v-if ="currentPage === navigator.lessonPage" class="lessonPage">
+        <div class="search-container">
         
-     </div> 
-       <div class="search-container">
-      
-           <input type="search" placeholder="Search Lessons" v-model ="searchText"/><input type="button" value="search"/>
-       </div>
-      
-     <!-- Sort Tags -->
-     <div class="sort-section">
-      
+            <input type="search" placeholder="Search Lessons" v-model="searchText" /><input type="button" value="search" />
+        </div>
+        
+        <!-- Sort Tags -->
+        <div class="sort-section">
+        
             <div class="sort-type">
-               <div>
-                <input type="radio" name="sort" value="subject" id="option1" v-model="sortType" /> <label for="option1">Subject</label>
-               </div>
                 <div>
-                    <input type="radio" name="sort" value="location" id="option2" v-model="sortType" /> <label for="option2">Location</label>
+                    <input type="radio" name="sort" value="subject" id="option1" v-model="sortType" /> <label
+                        for="option1">Subject</label>
                 </div>
                 <div>
-                    <input type="radio" name="sort" value="price" id="option3"  v-model="sortType"/> <label for="option3">Price</label>
+                    <input type="radio" name="sort" value="location" id="option2" v-model="sortType" /> <label
+                        for="option2">Location</label>
                 </div>
                 <div>
-                    <input type="radio" name="sort" value="spaces" id="option4"  v-model="sortType"/> <label for="option4">Spaces</label>
+                    <input type="radio" name="sort" value="price" id="option3" v-model="sortType" /> <label
+                        for="option3">Price</label>
                 </div>
-                  
+                <div>
+                    <input type="radio" name="sort" value="spaces" id="option4" v-model="sortType" /> <label
+                        for="option4">Spaces</label>
+                </div>
         
-    
+        
+        
             </div>
             <div class="sort-mode">
                 <div>
-                    <input type="radio" name="mode" value="descending" id="descending" v-model="mode" /> <label for="descending">Descending</label>
+                    <input type="radio" name="mode" value="descending" id="descending" v-model="mode" /> <label
+                        for="descending">Descending</label>
                 </div>
                 <div>
-                    <input type="radio" name="mode" value="ascending" id="ascending" v-model="mode" /> <label for="ascending">Ascending</label>
+                    <input type="radio" name="mode" value="ascending" id="ascending" v-model="mode" /> <label
+                        for="ascending">Ascending</label>
                 </div>
-            
-            </div>
-            
-    
         
-     </div>
+            </div>
+        
+        
+        
+        </div>
+        
+        <!-- Lessons section -->
+        <div class="lesson-container">
+            <div class="image-card" v-for="(lesson,key) in sortedLessons" :key="lesson.subject">
+                <div class="card-image"> <img :src="lesson.image" /></div>
+                <div class="card-text">
+        
+                    <div v-for="(value, key) in lesson" :key="key" v-if="!['id','image'].includes(key)">
+                        <h4>{{ key }}: {{ value }}</h4>
+                    </div>
+        
+                </div>
+                <div class="card-button"><button v-bind:disabled="lesson.spaces < 1" @click="addToCart(lesson)">Add to
+                        cart</button></div>
+        
+            </div>
+        </div>
+     </div> 
      
-     <!-- Lessons section -->
-       <div class="lesson-container">   
-           <div class="image-card" v-for="(lesson,key) in sortedLessons" :key="lesson.subject">
-            <div class="card-image"> <img :src="lesson.image"/></div> 
+<div v-else-if ="currentPage === navigator.cartPage"  class="shoppingCartPage">
+    <div class="cart-container">
+        <div class="image-card" v-for="(lesson,key) in cart" :key="lesson.subject">
+            <div class="card-image"> <img :src="lesson.image" /></div>
             <div class="card-text">
-                
-                <div   v-for="(value, key) in lesson" :key="key" v-if="key !== ('image' || '')">
+    
+                <div v-for="(value, key) in lesson" :key="key"v-if="!['id','image'].includes(key)">
                     <h4>{{ key }}: {{ value }}</h4>
                 </div>
-              
+    
             </div>
-            <div class="card-button"><button  v-bind:disabled ="lesson.spaces < 1" @click = "addToCart(lesson)">Add to cart</button></div>
-           
-           </div>
-       </div>
+            <div class="card-button"><button  @click="removeLesson(lesson)">Remove</button></div>
+    
+        </div>
+    </div>
+    <div class="checkout-container">
+        <div>
+        <label for="name">Name :</label>  <input v-model="order.name" id="name" type="phone"/> 
+        </div>
+        <div>
+            <label for="name" >Phone:</label> <input v-model="order.phone"  id="name" type="text" />
+        </div>
+        <div class="checkout-button"><button v-bind:disabled="!(order.name && order.phone)" @click="completeCheckout()">Add to
+                cart</button></div>
+    </div>
+    
+</div>
+     
+     
+      
     </div>
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+
     <script>
         let app = new Vue({
             el:"#app",
@@ -100,10 +131,14 @@
                 searchText:"",
                 cart:[],
                 navigator:{
-                    lessons:"lessonPage",
-                    cart:"shoppingCartPage",
+                    lessonPage:0,
+                    cartPage:1,
                 },
-                currentPage:"lessonPage"
+                currentPage:0,
+                order:{
+                    name:"",
+                    phone:""
+                }
              
             },
         
@@ -111,7 +146,6 @@
                 addToCart : function(lesson){
                     let lessonInCart = this.cart.find((item) => item.id === lesson.id);
                     const increaseAmount = 1;
-                    alert(lessonInCart)
                     // check if lesson is already in cart
                     if (lessonInCart){
                         lessonInCart.spaces += 1 
@@ -122,10 +156,29 @@
                     lesson.spaces--
                     
                 },
-                setCurrentPage:function(page){
-                    this.currentPage = page;
+                
+                // review this code
+                togglePage:function(){
+                  this.currentPage = this.currentPage === 0 ? 1 : 0;
                     
-                }
+                    
+                },
+                removeLesson:function (lesson) { 
+                    let lessonInLessons = this.lessons.find((item) => item.id === lesson.id);
+                   // remove the item if spaces less than zero
+                    if(lesson.spaces <= 1){
+                        this.cart = this.cart.filter((item) => item.id !== lesson.id);
+                    }
+                    else{
+    
+                        lesson.spaces -= 1;
+                    }
+                    lessonInLessons.spaces +=1
+                    
+                 },
+                 completeCheckout:function (){
+                    alert("order has been submitted")
+                 }
             },
               computed: {
                 sortedLessons: function () {
@@ -152,4 +205,4 @@
         })
     </script>
 </body>
-</html>9
+</html>
