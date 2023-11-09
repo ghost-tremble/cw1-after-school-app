@@ -191,7 +191,7 @@
                     
                  },
                  completeCheckout:function (){
-                    alert("order has been submitted")
+                    alert(`${this.order.name} your  order has been submitted`)
                  }
             },
               computed: {
@@ -212,7 +212,7 @@
                     )
             },
                isCheckoutDisabled: function(){
-            let isValidName = ( this.order.name.trim().length > 0 ) && /^[A-Za-z]*$/.test(this.order.name)
+            let isValidName = ( this.order.name.trim().length > 0 ) && /^[A-Za-z\s]*$/.test(this.order.name)
             let isVaidNumber = (this.order.phone.trim().length > 0) && /^[0-9]*$/.test(this.order.phone)
             
            let isButtonDisabled = !(isVaidNumber && isValidName)
