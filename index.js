@@ -83,7 +83,13 @@ let app = new Vue({
       let isVaidNumber =
         this.order.phone.trim().length > 0 && /^[0-9]*$/.test(this.order.phone);
 
-      let isButtonDisabled = !(isVaidNumber && isValidName);
+      let isButtonDisabled = !(isVaidNumber && isValidName) ;
+      // force set Disabled if cart is empty
+      if(this.cart.length === 0) {
+        isButtonDisabled = true;
+        this.order.errorMessage = "cart is empty";
+        return isButtonDisabled;
+      }
       this.order.errorMessage = "please enter a valid name and phone number";
       return isButtonDisabled;
     },
