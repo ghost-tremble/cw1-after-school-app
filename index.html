@@ -117,8 +117,9 @@
             </div>
         </form>
        
-        <div class="checkout-button"><button v-bind:disabled="!(order.name && order.phone)" v-on:click="completeCheckout()">
+        <div class="checkout-button"><button v-bind:disabled="isCheckoutDisabled" v-on:click="completeCheckout()">
                 Checkout Order </button></div>
+                <p v-if="isCheckoutDisabled === true" >{{order.errorMessage}}</p>
     </div>
     
 </div>
@@ -148,7 +149,8 @@
                 currentPage:0,
                 order:{
                     name:"",
-                    phone:""
+                    phone:"",
+                    errorMessage:"sss"
                 }
              
             },
@@ -209,7 +211,15 @@
                 }
                     )
             },
+               isCheckoutDisabled: function(){
+            let isValidName = ( this.order.name.trim().length > 0 ) && /^[A-Za-z]*$/.test(this.order.name)
+            let isVaidNumber = (this.order.phone.trim().length > 0) && /^[0-9]*$/.test(this.order.phone)
             
+           let isButtonDisabled = !(isVaidNumber && isValidName)
+          this.order.errorMessage = "please enter a valid name and phone number"
+           return isButtonDisabled;
+            
+           } 
             
         }
             
