@@ -15,7 +15,7 @@
     <div id="app">
        <h1>After School Activities</h1>
        <!-- Disabling the cart only on the lesson Page -->
-       <button class="cart" v-bind:disabled ="cart.length < 1 && currentPage !== 1"  @click = "togglePage()">   
+       <button class="cart" v-bind:disabled ="cart.length < 1 && currentPage !== 1"  v-on:click = "togglePage()">   
             <h3>Cart</h3>
             <p>{{cart.length}}</p>
      
@@ -77,7 +77,7 @@
                     </div>
         
                 </div>
-                <div class="card-button"><button v-bind:disabled="lesson.spaces < 1" @click="addToCart(lesson)">Add to
+                <div class="card-button"><button v-bind:disabled="lesson.spaces < 1" v-on:click="addToCart(lesson)">Add to
                         cart</button></div>
         
             </div>
@@ -95,7 +95,7 @@
                 </div>
     
             </div>
-            <div class="card-button"><button  @click="removeLesson(lesson)">Remove</button></div>
+            <div class="card-button"><button  v-on:click="removeLesson(lesson)">Remove</button></div>
     
         </div>
     </div>
@@ -106,7 +106,7 @@
         <div>
             <label for="name" >Phone:</label> <input v-model="order.phone"  id="name" type="text" />
         </div>
-        <div class="checkout-button"><button v-bind:disabled="!(order.name && order.phone)" @click="completeCheckout()">Add to
+        <div class="checkout-button"><button v-bind:disabled="!(order.name && order.phone)" v-on:click="completeCheckout()">Add to
                 cart</button></div>
     </div>
     

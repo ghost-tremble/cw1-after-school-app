@@ -3,7 +3,7 @@ let lessons = [
   {
     id:1,
     subject: "Bible Studies",
-    spaces: 1,
+    spaces: 5,
     location: "Barnet",
     price: 500,
     image:
@@ -12,7 +12,7 @@ let lessons = [
   {
     id:2,
     subject: "French Tutorial",
-    spaces: 4,
+    spaces: 5,
     location: "liverpool",
     price: 250,
     image:
@@ -21,7 +21,7 @@ let lessons = [
   {
     id:3,
     subject: "Japanese Tutorial",
-    spaces: 0,
+    spaces: 5,
     location: "leeds",
     price: 750,
     image:
