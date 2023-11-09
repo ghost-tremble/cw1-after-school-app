@@ -48,6 +48,7 @@ let lessons = [
   },
 
   {
+    id:6,
     subject: "Algebra",
     spaces: 5,
     location: "Kilburn",
@@ -55,6 +56,7 @@ let lessons = [
     image:"https://images.unsplash.com/photo-1653074281018-c08f358059ab?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGFsZ2VicmF8ZW58MHx8MHx8fDA%3D",
   },
   {
+    id:7,
     subject: "Javascript Coding tutorial",
     spaces: 5,
     location: "Archway",
@@ -63,6 +65,7 @@ let lessons = [
       "https://images.unsplash.com/photo-1517512006864-7edc3b933137?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fEphdmFzY3JpcHQlMjBDb2RpbmclMjB0dXRvcmlhbHxlbnwwfHwwfHx8MA%3D%3D",
   },
   {
+    id:8,
     subject: "Chemistry",
     spaces: 5,
     location: "Watford",
@@ -72,6 +75,7 @@ let lessons = [
   },
 
   {
+    id:9,
     subject: "Economics",
     spaces: 5,
     location: "machester",
@@ -80,6 +84,7 @@ let lessons = [
       "https://images.unsplash.com/photo-1612178991541-b48cc8e92a4d?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZWNvbm9taWNzfGVufDB8fDB8fHww",
   },
   {
+    id:10,
     subject: "Bussiness ethics",
     spaces: 5,
     location: "burnley",
@@ -88,12 +93,4 @@ let lessons = [
       "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGJ1c2luZXNzJTIwZXRoaWNzfGVufDB8fDB8fHww",
   },
 
-  {
-    subject: "Health and fitness",
-    spaces: 5,
-    location: "bournemouth",
-    price: 250,
-    image:
-      "https://images.unsplash.com/photo-1551984427-6d77a1918093?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aGVhbHRoJTIwYW5kJTIwZml0bmVzc3xlbnwwfHwwfHx8MA%3D%3D",
-  },
 ];
