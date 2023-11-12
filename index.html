@@ -28,7 +28,7 @@
      <div  v-if ="currentPage === navigator.lessonPage" class="lessonPage">
         <div class="search-container">
         
-            <input type="search" placeholder="Search Lessons" v-model="searchText" /><input type="button" value="search" />
+            <input type="search" placeholder="Type to Search Lessons" v-model="searchText" />
         </div>
         
         <!-- Sort Tags -->
@@ -78,7 +78,8 @@
                 <div class="card-text">
         
                     <div v-for="(value, key) in lesson" :key="key" v-if="!['id','image'].includes(key)">
-                        <h4>{{ key }}: {{ value }}</h4>
+                        <h4 v-if="key ==='price'">{{ key }}: ${{ value }}</h4>
+                        <h4 v-else>{{ key }}: {{ value }}</h4>
                     </div>
         
                 </div>
@@ -96,7 +97,8 @@
             <div class="card-text">
     
                 <div v-for="(value, key) in lesson" :key="key"v-if="!['id','image'].includes(key)">
-                    <h4>{{ key }}: {{ value }}</h4>
+                    <h4 v-if="key ==='price'">{{ key }}: ${{ value }}</h4>
+                    <h4 v-else >{{ key }}: {{ value }}</h4>
                 </div>
     
             </div>
