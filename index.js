@@ -2,7 +2,7 @@ let app = new Vue({
   el: "#app",
   data: {
     welcome: "hello world",
-    lessons,
+    lessons:[],
     showSubject: true,
     sortType: "subject",
     mode: "ascending",
@@ -21,9 +21,19 @@ let app = new Vue({
     },
   },
 
+  // make api requests before application mounts
+  mounted () {
+
+  getLessons().then((data)=>{
+this.lessons = data
+    })
+  
+  },
+  
+  
   methods: {
     addToCart: function (lesson) {
-      let lessonInCart = this.cart.find((item) => item.id === lesson.id);
+      let lessonInCart = this.cart.find((item) => item._id === lesson._id);
       const increaseAmount = 1;
       // check if lesson is already in cart
       if (lessonInCart) {
@@ -39,10 +49,10 @@ let app = new Vue({
       this.currentPage = this.currentPage === 0 ? 1 : 0;
     },
     removeLesson: function (lesson) {
-      let lessonInLessons = this.lessons.find((item) => item.id === lesson.id);
+      let lessonInLessons = this.lessons.find((item) => item._id === lesson._id);
       // remove the item if spaces less than zero
       if (lesson.spaces <= 1) {
-        this.cart = this.cart.filter((item) => item.id !== lesson.id);
+        this.cart = this.cart.filter((item) => item._id !== lesson._id);
       } else {
         lesson.spaces -= 1;
       }
@@ -55,11 +65,10 @@ let app = new Vue({
   computed: {
     sortedLessons: function () {
       let order = this.mode === "ascending" ? 1 : -1;
-      return this.lessons
-        .slice()
+      return this.lessons?.slice()
         .filter((item) => {
           return (
-            item.subject
+            item.topic
               .toLowerCase()
               .includes(this.searchText.toLowerCase()) ||
             item.location.toLowerCase().includes(this.searchText.toLowerCase())
