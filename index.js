@@ -58,8 +58,22 @@ this.lessons = data
       }
       lessonInLessons.spaces += 1;
     },
-    completeCheckout: function () {
-      alert(`${this.order.name} your  order has been submitted`);
+    completeCheckout: async function () {
+      const order = await createNewOrder(
+        {
+          name: this.order.name,
+          phoneNumber: this.order.phone,
+          lessonIds: this.cart,
+          spaces:1
+        }
+
+      )
+      if(order){
+       alert (`Order with the ID ${order.newOrder.insertedId} was ${order.message}`)
+        updateLessons(order.newOrder.insertedId).then((data)=>{
+          alert(data.message)
+        })
+      }
     },
   },
   computed: {

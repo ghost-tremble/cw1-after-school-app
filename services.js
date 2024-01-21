@@ -16,5 +16,54 @@ const getLessons  =  async ()=>{
 }
 
 
+// Create new order request
 
 
+
+
+// update lessons in database
+
+const updateLessons = async (orderId)=>{
+    const result = await fetch(`${base_url}/lessons/${orderId}`,{
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    const update = await result.json();
+
+    return update
+}
+
+
+const createNewOrder = async (payload)=>{
+    const result = await fetch(`${base_url}/order`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    const order = await result.json();
+    
+    if(!order.success){
+        alert(order.message)
+    }
+
+    return order
+
+}
+
+const searchLessons = async (query)=>{
+    const  result =  fetch(`${base_url}/search?q=${query}`)
+
+    const lessons = await result.json()
+    
+    if(!result.ok){
+        alert("an error occurred while fetching")
+    }
+
+
+    return lessons.lessons
+
+}
