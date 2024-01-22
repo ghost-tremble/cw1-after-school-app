@@ -55,15 +55,16 @@ const createNewOrder = async (payload)=>{
 }
 
 const searchLessons = async (query)=>{
-    const  result =  fetch(`${base_url}/search?q=${query}`)
+    const  result = await fetch(`${base_url}/search?q=${query}`)
 
     const lessons = await result.json()
     
-    if(!result.ok){
-        alert("an error occurred while fetching")
+    if(!lessons.success){
+        // return empty array if search empty
+       return []
     }
 
 
-    return lessons.lessons
+    return lessons.result
 
 }

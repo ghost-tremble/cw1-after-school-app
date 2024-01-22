@@ -8,6 +8,7 @@ let app = new Vue({
     mode: "ascending",
     query: "",
     searchText: "",
+    searchResults:[],
     cart: [],
     navigator: {
       lessonPage: 0,
@@ -30,8 +31,32 @@ this.lessons = data
   
   },
   
-  
+  watch: {
+    searchText: function (newSearchText, oldSearchText) {
+      if (newSearchText.length > 0) {
+        this.searchLessons();
+      } else {
+        this.searchResults = [];
+      }
+    },
+  },
   methods: {
+    async searchLessons() {
+      if (this.searchText.length > 0) {
+        try {
+          // Use await to wait for the searchLessons promise to resolve
+          const data = await searchLessons(this.searchText);
+          this.searchResults = data;
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          this.searchResults = []; // Handle errors as needed
+        }
+      } else {
+        // If search text is empty, reset the searchResults
+        this.searchResults = [];
+      }
+    },
+  
     addToCart: function (lesson) {
       let lessonInCart = this.cart.find((item) => item._id === lesson._id);
       const increaseAmount = 1;
@@ -77,17 +102,9 @@ this.lessons = data
     },
   },
   computed: {
-    sortedLessons: function () {
+    sortedLessons:  function () {
       let order = this.mode === "ascending" ? 1 : -1;
       return this.lessons?.slice()
-        .filter((item) => {
-          return (
-            item.topic
-              .toLowerCase()
-              .includes(this.searchText.toLowerCase()) ||
-            item.location.toLowerCase().includes(this.searchText.toLowerCase())
-          );
-        })
         .sort((a, b) => {
           if (
             typeof a[this.sortType] === "string" &&
@@ -116,5 +133,7 @@ this.lessons = data
       this.order.errorMessage = "please enter a valid name and phone number";
       return isButtonDisabled;
     },
+    
+
   },
 });

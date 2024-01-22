@@ -74,20 +74,40 @@
         
         <!-- Lessons section -->
         <div class="lesson-container">
-            <div class="image-card" v-for="(lesson,key) in sortedLessons" :key="lesson.subject">
-                <div class="card-image"> <img :src="lesson.image" /></div>
-                <div class="card-text">
-        
-                    <div v-for="(value, key) in lesson" :key="key" v-if="!['_id','image'].includes(key)">
-                        <h4 v-if="key ==='price'">{{ key }}: ${{ value }}</h4>
-                        <h4 v-else>{{ key }}: {{ value }}</h4>
+            <div v-if="searchText.length  > 0">
+                <div class="image-card" v-for="(lesson,key) in searchResults" :key="lesson.subject">
+                    <div class="card-image"> <img :src="lesson.image" /></div>
+                    <div class="card-text">
+            
+                        <div v-for="(value, key) in lesson" :key="key" v-if="!['_id','image'].includes(key)">
+                            <h4 v-if="key ==='price'">{{ key }}: ${{ value }}</h4>
+                            <h4 v-else>{{ key }}: {{ value }}</h4>
+                        </div>
+            
                     </div>
-        
+                    <div class="card-button"><button v-bind:disabled="lesson.spaces < 1" v-on:click="addToCart(lesson)">Add to
+                            cart</button></div>
+            
                 </div>
-                <div class="card-button"><button v-bind:disabled="lesson.spaces < 1" v-on:click="addToCart(lesson)">Add to
-                        cart</button></div>
-        
+
             </div>
+<div v-else>
+    <div class="image-card" v-for="(lesson,key) in sortedLessons" :key="lesson.subject">
+        <div class="card-image"> <img :src="lesson.image" /></div>
+        <div class="card-text">
+
+            <div v-for="(value, key) in lesson" :key="key" v-if="!['_id','image'].includes(key)">
+                <h4 v-if="key ==='price'">{{ key }}: ${{ value }}</h4>
+                <h4 v-else>{{ key }}: {{ value }}</h4>
+            </div>
+
+        </div>
+        <div class="card-button"><button v-bind:disabled="lesson.spaces < 1" v-on:click="addToCart(lesson)">Add to
+                cart</button></div>
+
+    </div>
+</div>
+
         </div>
      </div> 
      
