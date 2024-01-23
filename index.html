@@ -114,7 +114,7 @@
 <div v-else-if ="currentPage === navigator.cartPage"  class="shoppingCartPage">
     <div class="cart-container">
         <div class="image-card" v-for="(lesson,key) in cart" :key="lesson.subject">
-            <div class="card-image"> <img :src="lesson.image" /></div>
+            <div class="card-image"> <img :src="apiServer +lesson.image" /></div>
             <div class="card-text">
     
                 <div v-for="(value, key) in lesson" :key="key"v-if="!['_id','image'].includes(key)">

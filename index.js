@@ -90,7 +90,9 @@ this.lessons = data
           name: this.order.name,
           phoneNumber: this.order.phone,
           lessonIds: this.cart,
-          spaces:1
+          spaces:this.cart.reduce((track, currentElement) => {
+            return track + currentElement.spaces;
+          }, 0)
         }
 
       )

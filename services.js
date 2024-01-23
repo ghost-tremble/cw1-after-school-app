@@ -18,12 +18,7 @@ const getLessons  =  async ()=>{
 }
 
 
-// Create new order request
 
-
-
-
-// update lessons in database
 
 const updateLessons = async (orderId)=>{
     const result = await fetch(`${base_url}/lessons/${orderId}`,{
@@ -39,6 +34,7 @@ const updateLessons = async (orderId)=>{
 
 
 const createNewOrder = async (payload)=>{
+    console.log(payload)
     const result = await fetch(`${base_url}/order`,{
         method: 'POST',
         headers: {
