@@ -1,1 +1,1 @@
-export const base_url =  "http://cw-lessons.eu-north-1.elasticbeanstalk.com/api/v1"
+export const base_url =  "https://cw-lessons.eu-north-1.elasticbeanstalk.com/api/v1"
