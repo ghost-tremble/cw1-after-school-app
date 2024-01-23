@@ -1,4 +1,4 @@
-const base_url =  "http://cw-lessons.eu-north-1.elasticbeanstalk.com/api/v1"
+const base_url =  "https://cw-lessons.eu-north-1.elasticbeanstalk.com/api/v1"
 
 // Returns all lessons from the db
 const getLessons  =  async ()=>{
