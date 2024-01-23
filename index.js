@@ -3,6 +3,7 @@ let app = new Vue({
   data: {
     welcome: "hello world",
     lessons:[],
+    apiServer:remoteServer,
     showSubject: true,
     sortType: "subject",
     mode: "ascending",

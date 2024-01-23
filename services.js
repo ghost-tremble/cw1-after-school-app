@@ -1,4 +1,6 @@
-const base_url =  "https://cw-lessons.eu-north-1.elasticbeanstalk.com/api/v1"
+const localServer = "http://localhost:5000"
+const remoteServer = "https://cw-lessons.eu-north-1.elasticbeanstalk.com"
+const base_url =  `${remoteServer}/api/v1`
 
 // Returns all lessons from the db
 const getLessons  =  async ()=>{

@@ -74,9 +74,9 @@
         
         <!-- Lessons section -->
         <div class="lesson-container">
-            <div v-if="searchText.length  > 0">
+            <div v-if="searchText.length  > 0" class="lesson-container">
                 <div class="image-card" v-for="(lesson,key) in searchResults" :key="lesson.subject">
-                    <div class="card-image"> <img :src="lesson.image" /></div>
+                    <div class="card-image"> <img :src="apiServer +lesson.image" /></div>
                     <div class="card-text">
             
                         <div v-for="(value, key) in lesson" :key="key" v-if="!['_id','image'].includes(key)">
@@ -91,9 +91,9 @@
                 </div>
 
             </div>
-<div v-else>
+<div v-else class="lesson-container">
     <div class="image-card" v-for="(lesson,key) in sortedLessons" :key="lesson.subject">
-        <div class="card-image"> <img :src="lesson.image" /></div>
+        <div class="card-image"> <img :src="apiServer +lesson.image" /></div>
         <div class="card-text">
 
             <div v-for="(value, key) in lesson" :key="key" v-if="!['_id','image'].includes(key)">
