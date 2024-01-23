@@ -5,7 +5,7 @@ let app = new Vue({
     lessons:[],
     apiServer:remoteServer,
     showSubject: true,
-    sortType: "subject",
+    sortType: "topic",
     mode: "ascending",
     query: "",
     searchText: "",
